@@ -1,0 +1,13 @@
+@import 'primeflex/primeflex.scss';
+
+.coming-soon {
+  @include styleclass('m-0 relative p-8 overflow-hidden bg-no-repeat bg-cover bg-top');
+  background-image: url('/assets/green-dragon.png');
+  height: 20rem;
+}
+
+.coming-soon-shadow {
+  @include styleclass('w-full border-round pb-3');
+  background-color: rgba(0, 0, 0, 0.5);
+  margin-top: 10rem;
+}

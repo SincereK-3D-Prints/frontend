@@ -1,0 +1,15 @@
+@import 'primeflex/primeflex';
+
+.pi.pi-star-half-fill {
+  position: relative;
+  z-index: 2;
+}
+
+.pi.pi-star-half-fill::after {
+  @include styleclass('text-300');
+  content: "\e936";
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+}

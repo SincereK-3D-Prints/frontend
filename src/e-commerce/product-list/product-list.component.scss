@@ -1,0 +1,19 @@
+@import 'primeflex/primeflex.scss';
+
+.add-to-cart {
+  @include styleclass("border-1 border-white-alpha-20 border-round py-2 px-3 absolute");
+  @include styleclass("bg-black-alpha-30 text-white inline-flex align-items-center justify-content-center");
+  @include styleclass("hover:bg-black-alpha-40 transition-colors transition-duration-300 cursor-pointer font-semibold");
+
+  bottom: 1rem;
+  left: 1rem;
+  width: calc(100% - 2rem);
+  backdrop-filter: blur(4px);
+}
+
+.discount-badge {
+  @include styleclass("bg-pink-500 text-pink-50 font-bold px-2 py-1 absolute");
+  border-radius: 1rem;
+  right: 1rem;
+  top: 1rem;
+}

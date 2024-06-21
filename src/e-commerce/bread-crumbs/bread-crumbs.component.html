@@ -1,0 +1,23 @@
+<ul class="list-none py-1 px-0 m-0 border-y-1 surface-border flex flex-wrap align-items-center font-medium overflow-x-auto">
+  <li class="lg:pr-2">
+    <a
+      class="cursor-pointer text-900 white-space-nowrap"
+      [routerLink]="['/']"
+    >
+      Home
+    </a>
+  </li>
+  @for (route of routes; track $index) {
+    <li class="flex lg:px-2 p-2">
+      <i class="pi pi-chevron-right"></i>
+    </li>
+    <li class="lg:px-2">
+      <a
+        class="cursor-pointer text-900 white-space-nowrap"
+        [routerLink]="route.url"
+      >
+        {{ route.label }}
+      </a>
+    </li>
+  }
+</ul>

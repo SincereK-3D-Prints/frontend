@@ -1,0 +1,273 @@
+<div class="surface-section px-4 md:px-6 lg:px-8">
+  <shop-bread-crumbs />
+  <div class="grid my-4">
+    <div class="col-12 lg:col-6">
+      <shop-product-images [images]="images" />
+    </div>
+    <div class="col-12 lg:col-6 py-2 lg:pl-6">
+      <div class="flex align-items-center text-xl font-medium text-900 mb-4">
+        {{ product.name }}
+      </div>
+      <div class="flex align-items-center justify-content-between mb-5">
+        <span class="text-900 font-medium text-3xl block">
+          {{ product.price | currency: product.currency || 'USD' }}
+        </span>
+        <div class="flex align-items-center">
+          <span class="mr-3">
+              <i class="pi pi-star-fill text-yellow-500 mr-1"></i>
+              <i class="pi pi-star-fill text-yellow-500 mr-1"></i>
+              <i class="pi pi-star-fill text-yellow-500 mr-1"></i>
+              <i class="pi pi-star-fill text-yellow-500 mr-1"></i>
+              <i class="pi pi-star text-700 mr-1"></i>
+          </span>
+          <span class="text-sm"><b class="text-900 mr-1">24</b> <span class="text-500"></span>reviews</span>
+        </div>
+      </div>
+
+      <div class="font-bold text-900 mb-3">Color</div>
+      <div class="flex align-items-center mb-5">
+        <div class="w-2rem h-2rem flex-shrink-0 border-circle bg-bluegray-500 mr-3 cursor-pointer border-2 surface-border transition-all transition-duration-300"
+             [style.box-shadow]="color === 'bluegray' ? '0 0 0 0.2rem var(--bluegray-500)' : null" (click)="color = 'bluegray'"></div>
+        <div class="w-2rem h-2rem flex-shrink-0 border-circle bg-green-500 mr-3 cursor-pointer border-2 surface-border transition-all transition-duration-300"
+             [style.box-shadow]="color === 'green' ? '0 0 0 0.2rem var(--green-500)' : null" (click)="color = 'green'"></div>
+        <div class="w-2rem h-2rem flex-shrink-0 border-circle bg-blue-500 cursor-pointer border-2 surface-border transition-all transition-duration-300"
+             [style.box-shadow]="color === 'blue' ? '0 0 0 0.2rem var(--blue-500)' : null" (click)="color = 'blue'"></div>
+      </div>
+
+      <div class="mb-3 flex align-items-center justify-content-between">
+        <span class="font-bold text-900">Size</span>
+        <a tabindex="0" class="cursor-pointer text-600 text-sm flex align-items-center">Size Guide <i class="ml-1 pi pi-angle-right"></i></a>
+      </div>
+      <div class="grid grid-nogutter align-items-center mb-5">
+        <div class="col h-3rem border-1 border-300 text-900 inline-flex justify-content-center align-items-center flex-shrink-0 border-round mr-3 cursor-pointer hover:surface-100 transition-duration-150 transition-colors"
+             [ngClass]="{'border-blue-500 border-2 text-blue-500': size === 'XS'}" (click)="size = 'XS'">XS</div>
+        <div class="col h-3rem border-1 border-300 text-900 inline-flex justify-content-center align-items-center flex-shrink-0 border-round mr-3 cursor-pointer hover:surface-100 transition-duration-150 transition-colors"
+             [ngClass]="{'border-blue-500 border-2 text-blue-500': size === 'S'}" (click)="size = 'S'">S</div>
+        <div class="col h-3rem border-1 border-300 text-900 inline-flex justify-content-center align-items-center flex-shrink-0 border-round mr-3 cursor-pointer hover:surface-100 transition-duration-150 transition-colors"
+             [ngClass]="{'border-blue-500 border-2 text-blue-500': size === 'M'}" (click)="size = 'M'">M</div>
+        <div class="col h-3rem border-1 border-300 text-900 inline-flex justify-content-center align-items-center flex-shrink-0 border-round mr-3 cursor-pointer hover:surface-100 transition-duration-150 transition-colors"
+             [ngClass]="{'border-blue-500 border-2 text-blue-500': size === 'L'}"  (click)="size = 'L'">L</div>
+        <div class="col h-3rem border-1 border-300 text-900 inline-flex justify-content-center align-items-center flex-shrink-0 border-round cursor-pointer hover:surface-100 transition-duration-150 transition-colors"
+             [ngClass]="{'border-blue-500 border-2 text-blue-500': size === 'XL'}" (click)="size = 'XL'">XL</div>
+      </div>
+
+      <div class="font-bold text-900 mb-3">Quantity</div>
+      <div class="flex flex-column sm:flex-row sm:align-items-center sm:justify-content-between">
+        <p-inputNumber
+          [showButtons]="true"
+          [(ngModel)]="quantity"
+          min="0"
+          buttonLayout="horizontal"
+          spinnerMode="horizontal"
+          inputStyleClass="w-3rem text-center"
+          decrementButtonClass="p-button-text"
+          incrementButtonClass="p-button-text"
+          incrementButtonIcon="pi pi-plus"
+          decrementButtonIcon="pi pi-minus"
+        />
+        <div class="flex align-items-center flex-1 mt-3 sm:mt-0 ml-0">
+          <button pButton pRipple label="Add to Cart" class="flex-1"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p-tabView>
+    <p-tabPanel header="Details">
+      <div class="grid mt-4">
+        <div class="col-12 lg:col-4">
+          <div class="font-medium text-xl text-900 mb-3">Share your experience</div>
+          <p class="text-600 p-0 mt-0 mb-3 line-height-3">Orci a scelerisque purus semper eget duis at tellus at. Ut diam quam nulla porttitor.</p>
+          <button pButton pRipple label="Write a review" class="p-button-rounded"></button>
+        </div>
+        <div class="col-12 lg:col-4 flex align-items-start justify-content-center py-5 lg:py-0">
+          <div>
+            <span class="text-5xl text-900 font-bold mr-2">190</span>
+            <span class="text-5xl text-600">Reviews</span>
+            <div class="mt-3 text-center">
+              <i class="pi pi-star-fill text-yellow-500 text-2xl mr-1"></i>
+              <i class="pi pi-star-fill text-yellow-500 text-2xl mr-1"></i>
+              <i class="pi pi-star-fill text-yellow-500 text-2xl mr-1"></i>
+              <i class="pi pi-star-fill text-yellow-500 text-2xl mr-1"></i>
+              <i class="pi pi-star-half-fill text-yellow-500 text-2xl "></i>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 lg:col-4">
+          <ul class="list-none p-0 m-0">
+            <li class="flex align-items-center mb-2">
+              <span class="text-900 font-medium mr-1 w-1rem">5</span>
+              <i class="pi pi-star-fill text-yellow-500 mr-2"></i>
+              <div style="height:7px" class="border-round overflow-hidden flex-auto surface-300">
+                <div class="h-full bg-yellow-500 w-9 border-round"></div>
+              </div>
+              <span class="text-500 font-medium ml-2">75%</span>
+            </li>
+            <li class="flex align-items-center mb-2">
+              <span class="text-900 font-medium mr-1 w-1rem">4</span>
+              <i class="pi pi-star-fill text-yellow-500 mr-2"></i>
+              <div style="height:7px" class="border-round overflow-hidden flex-auto surface-300">
+                <div class="h-full bg-yellow-500 w-6 border-round"></div>
+              </div>
+              <span class="text-500 font-medium ml-2">50%</span>
+            </li>
+            <li class="flex align-items-center mb-2">
+              <span class="text-900 font-medium mr-1 w-1rem">3</span>
+              <i class="pi pi-star-fill text-yellow-500 mr-2"></i>
+              <div style="height:7px" class="border-round overflow-hidden flex-auto surface-300">
+                <div class="h-full bg-yellow-500 w-2 border-round"></div>
+              </div>
+              <span class="text-500 font-medium ml-2">20%</span>
+            </li>
+            <li class="flex align-items-center mb-2">
+              <span class="text-900 font-medium mr-1 w-1rem">2</span>
+              <i class="pi pi-star-fill text-yellow-500 mr-2"></i>
+              <div style="height:7px" class="border-round overflow-hidden flex-auto surface-300">
+                <div class="h-full bg-yellow-500 w-4 border-round"></div>
+              </div>
+              <span class="text-500 font-medium ml-2">40%</span>
+            </li>
+            <li class="flex align-items-center mb-2">
+              <span class="text-900 font-medium mr-1 w-1rem">1</span>
+              <i class="pi pi-star-fill text-yellow-500 mr-2"></i>
+              <div style="height:7px" class="border-round overflow-hidden flex-auto surface-300">
+                <div class="h-full bg-yellow-500 w-3 border-round"></div>
+              </div>
+              <span class="text-500 font-medium ml-2">30%</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-5">
+        <ul class="list-none m-0 p-0">
+          <li class="py-5 border-top-1 surface-border">
+            <div class="flex align-items-center justify-content-between mb-3">
+              <div class="flex align-items-center">
+                <img src="assets/images/blocks/avatars/circle/avatar-m-1.png" class="w-3rem h-3rem flex-shrink-0 mr-3" />
+                <div class="flex flex-column">
+                  <span class="text-900 font-medium mb-1">Robert Fox</span>
+                  <span class="text-500 font-medium text-sm">February 3, 2022</span>
+                </div>
+              </div>
+              <div class="flex align-items-center">
+                                <span class="mr-2">
+                                    <i class="pi pi-star-fill text-yellow-500 mr-1"></i>
+                                    <i class="pi pi-star-fill text-yellow-500 mr-1"></i>
+                                    <i class="pi pi-star-fill text-yellow-500 mr-1"></i>
+                                    <i class="pi pi-star-fill text-yellow-500 mr-1"></i>
+                                    <i class="pi pi-star-fill text-yellow-500"></i>
+                                </span>
+                <span class="font-medium">5</span>
+              </div>
+            </div>
+            <p class="text-600 p-0 m-0 line-height-3">Scelerisque varius morbi enim nunc. Arcu bibendum at varius vel pharetra vel turpis nunc eget. Elit ut aliquam purus sit amet luctus. Aliquam etiam erat velit scelerisque in.</p>
+          </li>
+          <li class="py-5 border-top-1 surface-border">
+            <div class="flex align-items-center justify-content-between mb-3">
+              <div class="flex align-items-center">
+                <img src="assets/images/blocks/avatars/circle/avatar-f-3.png" class="w-3rem h-3rem flex-shrink-0 mr-3" />
+                <div class="flex flex-column">
+                  <span class="text-900 font-medium mb-1">Savannah Williams</span>
+                  <span class="text-500 font-medium text-sm">February 4, 2022</span>
+                </div>
+              </div>
+              <div class="flex align-items-center">
+                                <span class="mr-2">
+                                    <i class="pi pi-star-fill text-yellow-500 mr-1"></i>
+                                    <i class="pi pi-star-fill text-yellow-500 mr-1"></i>
+                                    <i class="pi pi-star-fill text-yellow-500 mr-1"></i>
+                                    <i class="pi pi-star-fill text-yellow-500 mr-1"></i>
+                                    <i class="pi pi-star-fill text-yellow-500"></i>
+                                </span>
+                <span class="font-medium">5</span>
+              </div>
+            </div>
+            <p class="text-600 p-0 m-0 line-height-3">Orci porta non pulvinar neque laoreet suspendisse interdum consectetur. Vitae elementum curabitur vitae nunc sed velit dignissim sodales ut.</p>
+          </li>
+          <li class="py-5 border-top-1 surface-border">
+            <div class="flex align-items-center justify-content-between mb-3">
+              <div class="flex align-items-center">
+                <img src="assets/images/blocks/avatars/circle/avatar-f-2.png" class="w-3rem h-3rem flex-shrink-0 mr-3" />
+                <div class="flex flex-column">
+                  <span class="text-900 font-medium mb-1">Kathryn Murphy</span>
+                  <span class="text-500 font-medium text-sm">February 5, 2022</span>
+                </div>
+              </div>
+              <div class="flex align-items-center">
+                                <span class="mr-2">
+                                    <i class="pi pi-star-fill text-yellow-500 mr-1"></i>
+                                    <i class="pi pi-star-fill text-yellow-500 mr-1"></i>
+                                    <i class="pi pi-star-fill text-yellow-500 mr-1"></i>
+                                    <i class="pi pi-star-fill text-yellow-500 mr-1"></i>
+                                    <i class="pi pi-star-fill text-yellow-500"></i>
+                                </span>
+                <span class="font-medium">5</span>
+              </div>
+            </div>
+            <p class="text-600 p-0 m-0 line-height-3">Sollicitudin nibh sit amet commodo nulla facilisi nullam vehicula. Fringilla est ullamcorper eget nulla facilisi etiam dignissim diam quis. </p>
+          </li>
+        </ul>
+      </div>
+
+    </p-tabPanel>
+    <p-tabPanel header="Reviews">
+      <ul class="list-none p-0 m-0">
+        <li class="pb-5 border-bottom-1 surface-border">
+                    <span>
+                        <i class="pi pi-star-fill text-yellow-500 mr-1"></i>
+                        <i class="pi pi-star-fill text-yellow-500 mr-1"></i>
+                        <i class="pi pi-star-fill text-yellow-500 mr-1"></i>
+                        <i class="pi pi-star-fill text-yellow-500 mr-1"></i>
+                        <i class="pi pi-star-fill text-gray-500"></i>
+                    </span>
+          <div class="text-900 font-medium text-xl my-3">Absolute Perfection!</div>
+          <p class="mx-0 mt-0 mb-3 text-700 line-height-3">Blandit libero volutpat sed cras ornare arcu dui vivamus. Arcu dictum varius duis at consectetur lorem donec massa. Imperdiet proin fermentum leo vel orci porta non. Porttitor rhoncus dolor purus non.</p>
+          <span class="text-600 font-medium">Darlene Robertson, 2 days ago</span>
+        </li>
+        <li class="py-5 border-bottom-1 surface-border">
+                    <span>
+                        <i class="pi pi-star-fill text-yellow-500 mr-1"></i>
+                        <i class="pi pi-star-fill text-yellow-500 mr-1"></i>
+                        <i class="pi pi-star-fill text-yellow-500 mr-1"></i>
+                        <i class="pi pi-star-fill text-yellow-500 mr-1"></i>
+                        <i class="pi pi-star-fill text-yellow-500"></i>
+                    </span>
+          <div class="text-900 font-medium text-xl my-3">Classy</div>
+          <p class="mx-0 mt-0 mb-3 text-700 line-height-3">Venenatis cras sed felis eget. Proin nibh nisl condimentum id venenatis a condimentum.</p>
+          <span class="text-600 font-medium">Kristin Watson, 2 days ago</span>
+        </li>
+      </ul>
+    </p-tabPanel>
+    <p-tabPanel header="Shipping and Returns">
+      <p class="line-height-3 text-700 p-0 mx-0 mt-0 mb-4">Mattis aliquam faucibus purus in massa tempor nec feugiat nisl. Justo donec enim diam vulputate ut pharetra. Tempus egestas sed sed risus.
+        Feugiat sed lectus vestibulum mattis. Tristique nulla aliquet enim tortor at auctor urna nunc. Habitant morbi tristique senectus et. Facilisi nullam vehicula ipsum.</p>
+
+      <div class="grid">
+        <div class="col-12 md:col-6">
+          <span class="text-900 block font-medium mb-3">Shipping Costs</span>
+          <ul class="py-0 pl-3 m-0 text-700 mb-3">
+            <li class="mb-2">Japan - JPY 2,500.</li>
+            <li class="mb-2">Europe – EUR 10</li>
+            <li class="mb-2">Switzerland – CHF 10</li>
+            <li class="mb-2">Canada – CAD 25</li>
+            <li class="mb-2">USA – USD 20</li>
+            <li class="mb-2">Australia – AUD 30</li>
+            <li class="mb-2">United Kingdom – GBP 10</li>
+          </ul>
+        </div>
+        <div class="col-12 md:col-6">
+          <span class="text-900 block font-medium mb-3">Return Policy</span>
+          <p class="line-height-3 text-700 p-0 m-0">Pharetra et ultrices neque ornare aenean euismod elementum nisi. Diam phasellus vestibulum lorem sed. Mattis molestie a iaculis at. </p>
+        </div>
+      </div>
+    </p-tabPanel>
+  </p-tabView>
+
+  <div class="grid -mr-3 -ml-3 py-8">
+    <span class="text-900 p-2 text-4xl font-medium w-full">You may also like</span>
+    <shop-product-list
+      class="p-4"
+      [products]="products"
+    />
+  </div>
+</div>

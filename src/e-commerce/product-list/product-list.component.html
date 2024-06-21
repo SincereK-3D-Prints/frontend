@@ -1,0 +1,56 @@
+<div class="surface-section">
+  <div class="grid -mt-3 -ml-3 -mr-3">
+    @for (product of products; track $index) {
+      <div class="col-12 md:col-6 lg:col-3 mb-5 lg:mb-0">
+        <div class="mb-3 relative">
+          <img [src]="product.image" class="w-full"  alt="product.name" />
+          @if (product.discount) {
+            <span class="discount-badge">
+              @if (product.discount_type === 'flat') {
+                {{ product.discount | currency: product.currency ?? 'USD' }} OFF
+              } @else {
+                {{ product.discount }}% OFF
+              }
+            </span>
+          }
+          <button pRipple type="button" class="add-to-cart" (click)="addToCart($event, product)">
+            <i class="pi pi-shopping-cart mr-3 text-base"></i>
+            <span class="text-base">Add to Cart</span>
+          </button>
+        </div>
+        <div class="flex flex-column align-items-center">
+          <div class="flex justify-content-around w-full">
+            <span class="text-xl text-900 font-medium mb-3">{{ product.name }}</span>
+          </div>
+          <div class="flex mb-4 justify-content-around w-full">
+            @if (product.discount) {
+              <span class="line-through text-xl text-600">
+                {{ product.price | currency: product.currency ?? 'USD' }}
+              </span>
+            }
+            <span class="text-xl text-900 mb-3">
+              {{ discountPrice(product) | currency: product.currency ?? 'USD' }}
+            </span>
+          </div>
+          @if (product.colors) {
+            <div class="flex align-items-center mb-3">
+              @for (color of product.colors; track color) {
+                <div
+                  class="w-2rem h-2rem flex-shrink-0 border-circle mr-3 cursor-pointer border-2 surface-border transition-all transition-duration-300"
+                  [ngClass]="getColorClass(color)"
+                  [ngStyle]="getColorStyle(product, color)"
+                  (click)="product.color = color"
+                ></div>
+              }
+            </div>
+          }
+          @if (product.color) {
+            <span class="text-500">
+              {{product.color}}
+            </span>
+          }
+        </div>
+      </div>
+    }
+  </div>
+</div>
