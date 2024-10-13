@@ -3,7 +3,7 @@ import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { NgIf } from '@angular/common';
 
 @Component({
@@ -15,7 +15,6 @@ import { NgIf } from '@angular/common';
     InputTextModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
     NgIf,
   ],
   templateUrl: './coming-soon.view.html',
