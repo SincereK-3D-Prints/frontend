@@ -1,0 +1,5 @@
+export const environment = {
+
+};
+
+export const BACKEND_URL = 'http://localhost:3000';

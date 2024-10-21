@@ -10,6 +10,9 @@ import { ProductImagesComponent } from '../../product-images/product-images.comp
 import { BreadCrumbsComponent } from '../../bread-crumbs/bread-crumbs.component';
 import { Product } from '../../product-list/product';
 import { ProductListComponent } from '../../product-list/product-list.component';
+import { HttpClient } from "@angular/common/http";
+import { BACKEND_URL } from '../../../environments/environment';
+import { ActivatedRoute, Router } from "@angular/router";
 
 interface size {
   label: string,
@@ -30,7 +33,7 @@ interface size {
     ProductImagesComponent,
     BreadCrumbsComponent,
     CurrencyPipe,
-    ProductListComponent
+    ProductListComponent,
   ],
   templateUrl: './product.view.html',
   styleUrl: './product.view.scss'
@@ -51,7 +54,16 @@ export class ProductView implements OnInit {
   };
   products: Product[] = [];
 
+  constructor(private http: HttpClient, private route: ActivatedRoute) {
+  }
+
   ngOnInit(): void {
+    const name = this.route.snapshot.paramMap.get('name');
+    this.http.get(`${BACKEND_URL}/products/${name}`)
+      .subscribe((data: any) => {
+      })
+
+
     this.sizes = [
       { label: 'Small', value: 'S' },
       { label: 'Medium', value: 'M' },
