@@ -2,15 +2,15 @@
   <div class="flex flex-column w-2 justify-content-between">
     @for (image of images; track $index) {
       <img
-        [src]="image"
+        [src]="thumbImage(image)"
         class="w-full cursor-pointer border-2 border-round border-transparent transition-colors transition-duration-150"
         [ngClass]="{ 'border-primary': selectedImageIndex2 === $index }"
         (click)="selectedImageIndex = $index; selectedImageIndex2 = $index;"
-        alt="Product Image"
+        [alt]="name"
       />
     }
   </div>
   <div class="pl-3 w-10">
-    <img [src]="images[selectedImageIndex]" class="w-full" alt="Product Image" />
+    <img [src]="mainImage(selectedImageIndex)" class="w-full" alt="Product Image" />
   </div>
 </div>

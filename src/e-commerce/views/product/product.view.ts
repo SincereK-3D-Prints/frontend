@@ -40,17 +40,19 @@ interface size {
 })
 export class ProductView implements OnInit {
   color: string = 'bluegray';
-  images: string[] = [];
   liked: boolean = false;
   quantity: number = 1;
   selectedImageIndex: number = 3;
   selectedImageIndex2: number = 3;
   size: string = 'M';
-  sizes: size[] = [];
   product = {
     name: 'Product Title Placeholder',
-    price: 120,
+    price: [0],
     currency: 'USD',
+    sizes: [] as string[],
+    images: [] as string[],
+    shipping_cost: '0.00',
+    description: ''
   };
   products: Product[] = [];
 
@@ -58,24 +60,12 @@ export class ProductView implements OnInit {
   }
 
   ngOnInit(): void {
-    const name = this.route.snapshot.paramMap.get('name');
-    this.http.get(`${BACKEND_URL}/products/${name}`)
+    const slug = this.route.snapshot.paramMap.get('slug');
+    this.http.get(`${BACKEND_URL}/api/products/slug/${slug}`)
       .subscribe((data: any) => {
-      })
-
-
-    this.sizes = [
-      { label: 'Small', value: 'S' },
-      { label: 'Medium', value: 'M' },
-      { label: 'Large', value: 'L' }
-    ];
-
-    this.images = [
-      'assets/images/blocks/ecommerce/productoverview/product-overview-3-1.png',
-      'assets/images/blocks/ecommerce/productoverview/product-overview-3-2.png',
-      'assets/images/blocks/ecommerce/productoverview/product-overview-3-3.png',
-      'assets/images/blocks/ecommerce/productoverview/product-overview-3-4.png',
-    ];
+        console.log('Response:', data);
+        this.product = data.product;
+      });
 
     this.products = [
       {
@@ -107,5 +97,10 @@ export class ProductView implements OnInit {
         discount: 20
       },
     ];
+  }
+
+  sizePrice(): number {
+    const index = this.product.sizes.indexOf(this.size);
+    return this.product.price[index];
   }
 }
