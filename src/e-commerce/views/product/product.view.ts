@@ -13,6 +13,7 @@ import { ProductListComponent } from '../../product-list/product-list.component'
 import { HttpClient } from "@angular/common/http";
 import { BACKEND_URL } from '../../../environments/environment';
 import { ActivatedRoute, Router } from "@angular/router";
+import { TricolorCircleComponent } from "../../../components/tricolor-circle/tricolor-circle.component";
 
 interface size {
   label: string,
@@ -34,6 +35,7 @@ interface size {
     BreadCrumbsComponent,
     CurrencyPipe,
     ProductListComponent,
+    TricolorCircleComponent,
   ],
   templateUrl: './product.view.html',
   styleUrl: './product.view.scss'
