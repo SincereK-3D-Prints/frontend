@@ -1,5 +1,9 @@
 @import 'primeflex/primeflex';
 
+:host {
+  flex: 1;
+}
+
 .pi.pi-star-half-fill {
   position: relative;
   z-index: 2;

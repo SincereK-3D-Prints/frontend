@@ -5,6 +5,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { NgIf } from '@angular/common';
+import { RouterLink } from "@angular/router";
+import { ProductsView } from "../../e-commerce/views/products/products.view";
 
 @Component({
   selector: 'shop-coming-soon',
@@ -16,6 +18,8 @@ import { NgIf } from '@angular/common';
     FormsModule,
     ReactiveFormsModule,
     NgIf,
+    RouterLink,
+    ProductsView,
   ],
   templateUrl: './coming-soon.view.html',
   styleUrl: './coming-soon.view.scss'

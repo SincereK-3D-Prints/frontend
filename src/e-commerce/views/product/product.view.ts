@@ -21,7 +21,7 @@ interface size {
 }
 
 @Component({
-  selector: 'shop-product',
+  selector: 'shop-product-view',
   standalone: true,
   imports: [
     RippleModule,
@@ -68,6 +68,7 @@ export class ProductView implements OnInit {
       .subscribe((data: any) => {
         console.log('Response:', data);
         this.product = data.product;
+        this.product.images = this.product.images.slice(0, 4);
       });
 
     this.products = [

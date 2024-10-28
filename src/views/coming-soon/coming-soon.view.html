@@ -1,15 +1,15 @@
-<div class="flex flex-wrap">
+<div class="flex flex-wrap mb-1">
   <div class="w-full md:w-6 px-4 py-8 md:px-6 lg:px-8 text-center" style="background: linear-gradient(0deg, rgba(0, 0, 0, 0.42), rgba(0, 0, 0, 0.42)), linear-gradient(246.36deg, #007261 15.22%, #005347 65.22%);">
     <div class="text-6xl font-bold mb-1 text-white">SincereK 3D Prints</div>
-    <div class="text-6xl text-green-500 font-bold mb-4">Coming Soon</div>
+    <div class="text-6xl text-green-500 font-bold mt-6 mb-4">Subscribe</div>
 
     @if (subscribed) {
       <p class="mt-0 mb-3 line-height-3 text-center mx-auto text-white" style="max-width:500px">
-        Thanks for subscribing! We will notify you when we launch our new website at {{ form.get('email')?.value }}.
+        Thanks for subscribing! We will notify you when we launch new products at {{ form.get('email')?.value }}.
       </p>
     } @else {
       <p class="mt-0 mb-3 line-height-3 text-center mx-auto text-white" style="max-width:500px">
-        Signup to be notified when we launch our new website.
+        Signup to be notified when we launch new products.
       </p>
 
       <form [formGroup]="form" (ngSubmit)="subscribe()" class="flex align-items-center justify-content-center flex-wrap">
@@ -23,7 +23,10 @@
     style="background: url('assets/green-dragon.png'); min-height: 500px;">
   </div>
 </div>
-<div class="flex flex-wrap">
+
+<shop-products-view [breadcrumbs]="false" />
+
+<div class="flex flex-wrap mt-4">
   <div
     class="w-full md:w-6 bg-no-repeat bg-cover bg-center"
     style="background: url('assets/triceratops.png'); min-height: 500px;">

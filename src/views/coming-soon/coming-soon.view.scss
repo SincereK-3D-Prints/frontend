@@ -1,5 +1,9 @@
 @import 'primeflex/primeflex.scss';
 
+:host {
+  flex: 1;
+}
+
 .coming-soon {
   @include styleclass('m-0 relative p-8 overflow-hidden bg-no-repeat bg-cover bg-top');
   background-image: url('/assets/green-dragon.png');
