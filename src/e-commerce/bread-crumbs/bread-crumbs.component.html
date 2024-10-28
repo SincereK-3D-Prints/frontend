@@ -2,11 +2,12 @@
   <li class="lg:pr-2">
     <a
       class="cursor-pointer text-900 white-space-nowrap"
-      [routerLink]="['/']"
+      [routerLink]="home.url"
     >
-      Home
+      {{ home.label }}
     </a>
   </li>
+
   @for (route of routes; track $index) {
     <li class="flex lg:px-2 p-2">
       <i class="pi pi-chevron-right"></i>
@@ -18,6 +19,15 @@
       >
         {{ route.label }}
       </a>
+    </li>
+  }
+
+  @if (current) {
+    <li class="flex lg:px-2 p-2">
+      <i class="pi pi-chevron-right"></i>
+    </li>
+    <li class="lg:px-2">
+      {{ active }}
     </li>
   }
 </ul>

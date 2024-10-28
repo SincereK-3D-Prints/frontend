@@ -7,4 +7,16 @@
   border-radius: 50%;
   background: conic-gradient(var(--gradient));
   font-style: normal;
+  position: relative;
+}
+
+.circle.active::before {
+  content: '';
+  position: absolute;
+  top: -0.35rem;
+  left: -0.35rem;
+  right: -0.35rem;
+  bottom: -0.35rem;
+  border-radius: 50%;
+  border: 0.2rem solid var(--blue-500);
 }

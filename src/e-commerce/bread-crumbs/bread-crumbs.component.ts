@@ -12,8 +12,16 @@ import { MenuItem } from 'primeng/api';
   styleUrl: './bread-crumbs.component.scss'
 })
 export class BreadCrumbsComponent {
+  @Input() home: MenuItem = { label: 'Home', url: '/' };
   @Input() routes: MenuItem[] = [
-    { label: 'Test', url: '/test' },
-    { label: 'Product', url: '/product' }
+    { label: 'Products', url: '/products' }
   ];
+  @Input() active: String|MenuItem = '';
+
+  get current() {
+    if (typeof this.active === 'object') {
+      return (this.active as MenuItem).label;
+    }
+    return this.active;
+  }
 }

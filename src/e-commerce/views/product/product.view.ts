@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RippleModule } from 'primeng/ripple';
 import { StyleClassModule } from 'primeng/styleclass';
-import { CurrencyPipe, NgClass } from '@angular/common';
+import { CurrencyPipe, NgClass, TitleCasePipe } from '@angular/common';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { ButtonModule } from 'primeng/button';
 import { FormsModule } from '@angular/forms';
@@ -36,12 +36,13 @@ interface size {
     CurrencyPipe,
     ProductListComponent,
     TricolorCircleComponent,
+    TitleCasePipe,
   ],
   templateUrl: './product.view.html',
   styleUrl: './product.view.scss'
 })
 export class ProductView implements OnInit {
-  color: string = 'bluegray';
+  color: string = 'rainbow sparkle';
   liked: boolean = false;
   quantity: number = 1;
   selectedImageIndex: number = 3;
@@ -50,9 +51,9 @@ export class ProductView implements OnInit {
   product = {
     name: 'Product Title Placeholder',
     price: [0],
-    currency: 'USD',
-    sizes: [] as string[],
+    colors: [] as string[],
     images: [] as string[],
+    sizes: [] as string[],
     shipping_cost: '0.00',
     description: ''
   };

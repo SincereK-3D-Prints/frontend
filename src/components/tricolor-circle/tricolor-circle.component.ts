@@ -1,21 +1,32 @@
 import { Component, Input } from '@angular/core';
-import { NgStyle } from "@angular/common";
+import { NgClass, NgStyle } from '@angular/common';
 
 @Component({
   selector: 'sk3dp-tricolor-circle',
   standalone: true,
+  imports: [ NgStyle, NgClass ],
   templateUrl: './tricolor-circle.component.html',
-  imports: [
-    NgStyle
-  ],
-  styleUrls: [ './tricolor-circle.component.scss' ]
+  styleUrls: ['./tricolor-circle.component.scss']
 })
 export class TricolorCircleComponent {
+  @Input() active: boolean = false;
   @Input() colors: string = '';
 
   getCircleStyle() {
+    if (this.colors === 'rainbow sparkle') {
+      this.colors = 'red,orange,yellow,green,blue,indigo,violet';
+    }
+
+
     const colorsArray = this.colors.includes(',')
-      ? this.colors.split(',').map(color => color.trim())
+      ? this.colors.split(',').map(color => {
+        switch (color) {
+          case 'copper':
+            return '#B87333';
+          default:
+            return color.trim();
+        }
+      })
       : [this.colors.trim()];
 
     const totalColors = colorsArray.length;
