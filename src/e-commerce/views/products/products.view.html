@@ -5,7 +5,7 @@
   <div class="py-4 text-900 font-medium text-4xl mb-1">Products</div>
     <div class="grid -mt-3 -ml-3 -mr-3">
       @for (product of products; track product) {
-        <a class="col-12 md:col-6 lg:col-4" routerLink="/products/{{product.slug}}">
+        <a class="product col-12 md:col-6 lg:col-4" routerLink="/products/{{product.slug}}">
           <div class="p-2">
             <div class="shadow-2 p-4 surface-card border-round">
               <div class="relative mb-3">

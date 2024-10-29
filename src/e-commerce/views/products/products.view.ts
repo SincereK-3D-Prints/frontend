@@ -21,13 +21,7 @@ export class ProductsView implements OnInit {
   @Input() breadcrumbs: boolean = true;
   products: any[] = [];
 
-  constructor(private http: HttpClient) {
-    this.http.get<any>(`${BACKEND_URL}/api/products`)
-      .subscribe(({ products }) => {
-        console.log('Products:', products);
-        this.products = products;
-      });
-  }
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
     this.http.get<any>(`${BACKEND_URL}/api/products`)
