@@ -36,7 +36,7 @@ yarn-error.log
 /libpeerconnection.log
 testem.log
 /typings
-/dist
+/dist/
 *lock.*
 
 # System files
