@@ -8,16 +8,34 @@ import { FormsModule } from '@angular/forms';
 import { TabViewModule } from 'primeng/tabview';
 import { ProductImagesComponent } from '../../product-images/product-images.component';
 import { BreadCrumbsComponent } from '../../bread-crumbs/bread-crumbs.component';
-import { Product } from '../../product-list/product';
 import { ProductListComponent } from '../../product-list/product-list.component';
 import { HttpClient } from "@angular/common/http";
 import { BACKEND_URL } from '../../../environments/environment';
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 import { TricolorCircleComponent } from "../../../components/tricolor-circle/tricolor-circle.component";
+import { CartService } from "../../services/shopping-cart.service";
+import { MessageService } from "primeng/api";
+import { CartItem } from "../../services/shopping-cart.types";
 
-interface size {
-  label: string,
-  value: string
+enum Sizes {
+  XS = 'XS',
+  S = 'S',
+  M = 'M',
+  L = 'L',
+  XL = 'XL',
+  XXL = 'XXL'
+}
+
+interface Product {
+  id: number,
+  name: string,
+  slug: string,
+  price: number[],
+  colors: string[],
+  images: string[],
+  sizes: Sizes[],
+  shipping_cost: string | number,
+  description: string
 }
 
 @Component({
@@ -43,23 +61,24 @@ interface size {
 })
 export class ProductView implements OnInit {
   color: string = 'rainbow sparkle';
-  liked: boolean = false;
   quantity: number = 1;
-  selectedImageIndex: number = 3;
-  selectedImageIndex2: number = 3;
   size: string = 'M';
-  product = {
+  product: Partial<Product> = {
     name: 'Product Title Placeholder',
     price: [0],
-    colors: [] as string[],
-    images: [] as string[],
-    sizes: [] as string[],
+    colors: [],
+    images: [],
+    sizes: [],
     shipping_cost: '0.00',
     description: ''
   };
-  products: Product[] = [];
 
-  constructor(private http: HttpClient, private route: ActivatedRoute) {
+  constructor(
+    private cartService: CartService,
+    private http: HttpClient,
+    private messageService: MessageService,
+    private route: ActivatedRoute
+  ) {
   }
 
   ngOnInit(): void {
@@ -67,44 +86,38 @@ export class ProductView implements OnInit {
     this.http.get(`${BACKEND_URL}/api/products/slug/${slug}`)
       .subscribe((data: any) => {
         console.log('Response:', data);
-        this.product = data.product;
-        this.product.images = this.product.images.slice(0, 4);
+        this.product = data.product as Product;
+        this.product.images = this.product.images!.slice(0, 4);
       });
-
-    this.products = [
-      {
-        id: '1',
-        image: "assets/images/blocks/ecommerce/productlist/product-list-2-1.png",
-        name: "Product 1",
-        price: 125.00,
-        discount: 25
-      },
-      {
-        id: '2',
-        image: "assets/images/blocks/ecommerce/productlist/product-list-2-2.png",
-        name: "Product 2",
-        price: 150.00,
-        discount: 10
-      },
-      {
-        id: '3',
-        image: "assets/images/blocks/ecommerce/productlist/product-list-2-3.png",
-        name: "Product 3",
-        price: 175.00,
-        discount: 15
-      },
-      {
-        id: '4',
-        image: "assets/images/blocks/ecommerce/productlist/product-list-2-4.png",
-        name: "Product 4",
-        price: 250.00,
-        discount: 20
-      },
-    ];
   }
 
   sizePrice(): number {
-    const index = this.product.sizes.indexOf(this.size);
-    return this.product.price[index];
+    const index = this.product.sizes!.indexOf(this.size as Sizes);
+    return this.product.price![index];
+  }
+
+  addToCart() {
+    const cartItem: CartItem = {
+      id: this.product.id!,
+      name: this.product.name!,
+      displayName: `${this.product.name} - ${this.color}`, // Add a displayName for cart display
+      price: this.sizePrice(),
+      quantity: this.quantity,
+      shipping_cost: typeof this.product.shipping_cost === 'string'
+        ? parseFloat(this.product.shipping_cost)
+        : this.product.shipping_cost!,
+      selectedOptions: {
+        size: this.size,
+        color: this.color
+      }
+    };
+
+    this.cartService.addItem(cartItem);
+
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Added to Cart',
+      detail: `${cartItem.displayName} has been added to your cart`
+    });
   }
 }
