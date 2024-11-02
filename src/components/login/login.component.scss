@@ -1,0 +1,75 @@
+:host {
+  font-family: Open Sans, sans-serif;
+}
+
+h5 {
+  font-family: Balsamiq Sans, cursive;
+  font-weight: 500;
+  color: #414141;
+  margin-bottom: 0.5rem;
+}
+
+.login-container {
+  padding: 1.25rem;
+  min-width: 19rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.links {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 0 0;
+  padding: 0 0.25rem;
+
+  a {
+    display: flex;
+    font-family: Balsamiq Sans, cursive;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+hr {
+  margin: 1rem 0;
+  border: 1px solid #E0E0E0;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+button {
+  color: white !important;
+  font-size: 1.15rem;
+  height: 3rem;
+
+  &.login {
+    background: #447A6C;
+
+    &:hover {
+      background: #3B6A5E;
+    }
+
+    &:disabled {
+      background: #536763;
+    }
+  }
+
+  &.google {
+    background: #DE5246;
+  }
+
+  &.facebook {
+    background: #3B5998;
+  }
+}

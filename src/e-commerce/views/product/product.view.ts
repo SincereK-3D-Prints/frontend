@@ -11,19 +11,16 @@ import { BreadCrumbsComponent } from '../../bread-crumbs/bread-crumbs.component'
 import { ProductListComponent } from '../../product-list/product-list.component';
 import { HttpClient } from "@angular/common/http";
 import { BACKEND_URL } from '../../../environments/environment';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { TricolorCircleComponent } from "../../../components/tricolor-circle/tricolor-circle.component";
 import { CartService } from "../../services/shopping-cart.service";
 import { MessageService } from "primeng/api";
 import { CartItem } from "../../services/shopping-cart.types";
 
 enum Sizes {
-  XS = 'XS',
   S = 'S',
   M = 'M',
-  L = 'L',
-  XL = 'XL',
-  XXL = 'XXL'
+  L = 'L'
 }
 
 interface Product {
@@ -56,6 +53,7 @@ interface Product {
     TricolorCircleComponent,
     TitleCasePipe,
   ],
+  providers: [CartService, MessageService],
   templateUrl: './product.view.html',
   styleUrl: './product.view.scss'
 })
@@ -77,9 +75,9 @@ export class ProductView implements OnInit {
     private cartService: CartService,
     private http: HttpClient,
     private messageService: MessageService,
-    private route: ActivatedRoute
-  ) {
-  }
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     const slug = this.route.snapshot.paramMap.get('slug');
@@ -100,13 +98,14 @@ export class ProductView implements OnInit {
     const cartItem: CartItem = {
       id: this.product.id!,
       name: this.product.name!,
-      displayName: `${this.product.name} - ${this.color}`, // Add a displayName for cart display
+      image: this.product.images![0],
+      displayName: `${this.product.name} - ${this.color}`,
       price: this.sizePrice(),
       quantity: this.quantity,
       shipping_cost: typeof this.product.shipping_cost === 'string'
         ? parseFloat(this.product.shipping_cost)
         : this.product.shipping_cost!,
-      selectedOptions: {
+      options: {
         size: this.size,
         color: this.color
       }
@@ -114,10 +113,12 @@ export class ProductView implements OnInit {
 
     this.cartService.addItem(cartItem);
 
+    console.log('Added to cart:', cartItem);
     this.messageService.add({
       severity: 'success',
       summary: 'Added to Cart',
       detail: `${cartItem.displayName} has been added to your cart`
     });
+    this.router.navigate(['/checkout']);
   }
 }

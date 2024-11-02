@@ -14,6 +14,8 @@ export interface OrderProduct {
 }
 
 export interface ShippingInfo {
+  first_name: string;
+  last_name: string;
   address1: string;
   address2?: string;
   city: string;
@@ -25,7 +27,6 @@ export interface ShippingInfo {
 
 export interface BillingInfo extends ShippingInfo {
   email?: string;
-  name?: string;
 }
 
 export interface Order {
