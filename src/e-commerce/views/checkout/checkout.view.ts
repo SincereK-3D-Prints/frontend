@@ -13,10 +13,11 @@ import { InputNumberModule } from "primeng/inputnumber";
 import { Ripple } from "primeng/ripple";
 import { OrderService } from "../../services/order.service";
 import { CartService } from "../../services/shopping-cart.service";
-import { CartItem } from "../../services/shopping-cart.types";
+import { Cart, CartItem } from "../../services/cart.types";
 import { BACKEND_URL } from "../../../environments/environment";
 import { Order } from "../../services/order.types";
 import { MessageService } from "primeng/api";
+import { CartStore } from "../../stores/cart.store";
 
 @Component({
   selector: 'shop-checkout-view',
@@ -38,7 +39,7 @@ import { MessageService } from "primeng/api";
     CurrencyPipe,
     TitleCasePipe
   ],
-  providers: [CartService, MessageService, OrderService],
+  providers: [CartService, CartStore, OrderService],
   standalone: true
 })
 export class CheckoutView implements OnInit {
@@ -85,20 +86,29 @@ export class CheckoutView implements OnInit {
   subtotal: number = 0;
 
   constructor(
+    private cart: CartStore,
     private cartService: CartService,
     private orderService: OrderService
   ) {}
 
   ngOnInit() {
-    this.items = this.cartService.items as CartItem[];
+    this.cart.get()
+      .subscribe((cart: Cart) => {
+        console.log('Cart:', cart);
+        this.items = cart.items;
+      })
   }
 
   thumbImage(image: string) {
     return `${BACKEND_URL}/images/${image}`;
   }
 
-  updateItem(item: CartItem) {
-    // this.cartService.updateQuantity(item);
-    // this.calculateTotals();
+  updateQuantity(item: CartItem, $event: any) {
+    console.log('Updating quantity:', item, $event);
+    this.cart.quantity(item, $event);
+  }
+
+  removeItem(item: CartItem) {
+    this.cart.remove(item);
   }
 }

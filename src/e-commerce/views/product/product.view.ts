@@ -13,9 +13,9 @@ import { HttpClient } from "@angular/common/http";
 import { BACKEND_URL } from '../../../environments/environment';
 import { ActivatedRoute, Router } from "@angular/router";
 import { TricolorCircleComponent } from "../../../components/tricolor-circle/tricolor-circle.component";
-import { CartService } from "../../services/shopping-cart.service";
 import { MessageService } from "primeng/api";
-import { CartItem } from "../../services/shopping-cart.types";
+import { CartItem } from "../../services/cart.types";
+import { CartStore } from "../../stores/cart.store";
 
 enum Sizes {
   S = 'S',
@@ -53,7 +53,7 @@ interface Product {
     TricolorCircleComponent,
     TitleCasePipe,
   ],
-  providers: [CartService, MessageService],
+  providers: [CartStore],
   templateUrl: './product.view.html',
   styleUrl: './product.view.scss'
 })
@@ -72,7 +72,7 @@ export class ProductView implements OnInit {
   };
 
   constructor(
-    private cartService: CartService,
+    private cart: CartStore,
     private http: HttpClient,
     private messageService: MessageService,
     private route: ActivatedRoute,
@@ -111,14 +111,16 @@ export class ProductView implements OnInit {
       }
     };
 
-    this.cartService.addItem(cartItem);
+    this.cart.add(cartItem);
 
-    console.log('Added to cart:', cartItem);
-    this.messageService.add({
-      severity: 'success',
-      summary: 'Added to Cart',
-      detail: `${cartItem.displayName} has been added to your cart`
-    });
-    this.router.navigate(['/checkout']);
+    setTimeout(() => {
+      console.log('Added to cart:', cartItem);
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Added to Cart',
+        detail: `${cartItem.displayName} has been added to your cart`
+      });
+      this.router.navigate([ '/checkout' ]);
+    }, 0);
   }
 }

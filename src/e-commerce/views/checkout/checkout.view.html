@@ -139,9 +139,9 @@
                   incrementButtonClass="p-button-text text-600 hover:text-primary py-1 px-1"
                   incrementButtonIcon="pi pi-plus"
                   decrementButtonIcon="pi pi-minus"
-                  (change)="updateItem(item)"
+                  (ngModelChange)="updateQuantity(item, $event)"
                 />
-                <button pButton pRipple icon="pi pi-trash" class="text-600 p-button-text p-button-rounded"></button>
+                <button pButton pRipple icon="pi pi-trash" class="text-600 p-button-text p-button-rounded" (click)="removeItem(item)"></button>
               </div>
             </div>
           </div>

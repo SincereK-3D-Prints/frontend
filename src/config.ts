@@ -3,7 +3,9 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideRouter, withRouterConfig } from '@angular/router';
+import { CartStore } from "./e-commerce/stores/cart.store";
 import { routes } from './routes';
+import { MessageService } from "primeng/api";
 
 export const config: ApplicationConfig = {
   providers: [
@@ -18,6 +20,7 @@ export const config: ApplicationConfig = {
       })
     ),
     provideClientHydration(),
-    provideHttpClient(withFetch())
+    provideHttpClient(withFetch()),
+    MessageService
   ]
 };
