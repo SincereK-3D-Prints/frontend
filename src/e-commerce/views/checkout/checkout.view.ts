@@ -16,8 +16,12 @@ import { CartService } from "../../services/shopping-cart.service";
 import { Cart, CartItem } from "../../services/cart.types";
 import { BACKEND_URL } from "../../../environments/environment";
 import { Order } from "../../services/order.types";
-import { MessageService } from "primeng/api";
 import { CartStore } from "../../stores/cart.store";
+
+interface Carrier {
+  name: string,
+  price: number
+}
 
 @Component({
   selector: 'shop-checkout-view',
@@ -44,7 +48,7 @@ import { CartStore } from "../../stores/cart.store";
 })
 export class CheckoutView implements OnInit {
   checked: any;
-  selectedValue2: string | undefined;
+  processor: string | undefined;
   cc: any;
   ccRegex: any;
   expRegex: any;
@@ -52,7 +56,9 @@ export class CheckoutView implements OnInit {
   cvcRegex: RegExp | KeyFilterPattern | null | undefined;
   value3: any;
   exp: any;
-  quantities1: any;
+
+  carriers: Carrier[] = [ { name: 'USPS', price: 5 } ];
+  processors: string[] = [ 'Stripe' ];
 
   order: Partial<Order> = {
     email: '',
@@ -78,6 +84,7 @@ export class CheckoutView implements OnInit {
       country: 'United States'
     },
     products: [],
+    processor: 'Stripe',
     total: 0,
     subtotal: 0
   };

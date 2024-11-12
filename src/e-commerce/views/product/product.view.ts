@@ -112,15 +112,11 @@ export class ProductView implements OnInit {
     };
 
     this.cart.add(cartItem);
-
-    setTimeout(() => {
-      console.log('Added to cart:', cartItem);
-      this.messageService.add({
-        severity: 'success',
-        summary: 'Added to Cart',
-        detail: `${cartItem.displayName} has been added to your cart`
-      });
-      this.router.navigate([ '/checkout' ]);
-    }, 0);
+    this.messageService.add({
+      severity: 'success',
+      summary: 'Added to Cart',
+      detail: `${cartItem.displayName} has been added to your cart`
+    });
+    this.router.navigate([ '/checkout' ]);
   }
 }
